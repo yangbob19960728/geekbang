@@ -39,7 +39,9 @@ class Carousel extends Component{
             let up = event => {
                 let x = event.clientX - startX;
                 position = position - Math.round(x / 500);
-                for (const offset of [0, - Math.sign(Math.round(x / 500) - x + 250 * Math.sign(x))]) {
+                let offsetData = - x + 250 * Math.sign(x);
+                offsetData = (offsetData == 0) ? -1 : offsetData; // 在250的時候要處理變成0的情況，
+                for (const offset of [0, - Math.sign(offsetData)]) {
                     let pos = position + offset;
                     pos = (pos + children.length) % children.length;
                     children[pos].style.transition = "";
